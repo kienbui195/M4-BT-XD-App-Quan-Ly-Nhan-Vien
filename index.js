@@ -5,8 +5,6 @@ const upload = multer();
 const port = 8000;
 app.set('view engine', 'ejs');
 app.set('views','./views');
-const url = require('url');
-const qs = require('qs');
 
 app.get('/create', (req, res) => {
     res.render('addEmployee');
@@ -32,7 +30,7 @@ app.get('/' , (req, res) => {
 })
 
 app.get('/delete', (req, res) => {
-    let id = qs.parse(url.parse(req.url).query).id;
+    let id = req.query.id;
     employees.splice(id - 1, 1);
     res.render('listEmployee', {data: employees});
 })
